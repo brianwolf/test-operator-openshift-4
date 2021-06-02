@@ -1,12 +1,29 @@
-apiVersion: route.openshift.io/v1
-kind: Route
+# apiVersion: route.openshift.io/v1
+# kind: Route
+# metadata:
+#   name: example-controller-route
+#   labels:
+#     app: example-controller
+# spec:
+#   path: /
+#   to:
+#     kind: Service
+#     name: example-controller-svc
+#   port:
+#     targetPort: 80
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
 metadata:
   name: example-controller-route
   labels:
     app: example-controller
 spec:
-  path: /
-  to:
-    kind: Service
-    name: example-controller-svc
-    weight: 100
+  rules:
+    - host: example.com
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: example-controller-svc
+              servicePort: 80

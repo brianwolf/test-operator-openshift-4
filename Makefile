@@ -98,7 +98,13 @@ bundle-push:
 # desplega el bundle, se debe tener creado el namespace "nalabs-operator-system"
 .SILENT:
 bundle-deploy-on-cluster:
+	oc project nalabs-operator-system
 	operator-sdk run bundle \
 		-n nalabs-operator-system \
 		docker.io/$(BUNDLE_IMG)
 
+
+# permite probar el despliegue de los objetos dentro del bundle
+.SILENT:
+bundle-test:
+	oc apply -f config/samples/demo_v1_example.yaml

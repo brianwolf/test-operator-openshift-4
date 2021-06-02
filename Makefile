@@ -1,5 +1,5 @@
 # Current Operator version
-VERSION ?= 0.0.2
+VERSION ?= 0.0.3
 # Default bundle image tag
 BUNDLE_IMG ?= brianlobonalabs/bundle-example-nalabs:$(VERSION)
 # Options for 'bundle-build'
@@ -12,7 +12,7 @@ endif
 BUNDLE_METADATA_OPTS ?= $(BUNDLE_CHANNELS) $(BUNDLE_DEFAULT_CHANNEL)
 
 # Image URL to use all building/pushing image targets
-IMG ?= brianlobonalabs/operator-example-nalabs:latest
+IMG ?= brianlobonalabs/operator-example-nalabs:$(VERSION)
 
 all: docker-build
 
@@ -95,10 +95,19 @@ bundle-build:
 bundle-push:
 	docker push $(BUNDLE_IMG)
 
+
+
+
+# =============================================
+# PROPIOS
+# =============================================
+
+PROJECT_NAME=nalabs-operator-system
+
 # desplega el bundle, se debe tener creado el namespace "nalabs-operator-system"
 .SILENT:
-bundle-deploy-on-cluster:
-	oc project nalabs-operator-system
+bundle-deploy-on-cluster: project-create
+	oc project $(PROJECT_NAME)
 	operator-sdk run bundle \
 		-n nalabs-operator-system \
 		docker.io/$(BUNDLE_IMG)
@@ -108,3 +117,12 @@ bundle-deploy-on-cluster:
 .SILENT:
 bundle-test:
 	oc apply -f config/samples/demo_v1_example.yaml
+
+
+
+# crea el proyecto en el cluster
+.SILENT:
+project-create:
+	oc new-project $(PROJECT_NAME)
+
+

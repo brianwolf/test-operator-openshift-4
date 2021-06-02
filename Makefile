@@ -95,6 +95,10 @@ bundle-build:
 bundle-push:
 	docker push $(BUNDLE_IMG)
 
-
-
+# desplega el bundle, se debe tener creado el namespace "nalabs-operator-system"
+.SILENT:
+bundle-deploy-on-cluster:
+	operator-sdk run bundle \
+		-n nalabs-operator-system \
+		docker.io/$(BUNDLE_IMG)
 

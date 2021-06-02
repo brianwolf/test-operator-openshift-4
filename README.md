@@ -16,5 +16,5 @@ mv helm-operator_linux_amd64 ./bin/helm-operator ;\
 
 ## Documentacion
 
-* [Pasos a seguir por Redhat](https://docs.openshift.com/container-platform/4.7/operators/operator_sdk/golang/osdk-golang-tutorial.html)
+* [Pasos a seguir por Redhat](https://docs.openshift.com/container-platform/4.7/operators/operator_sdk/helm/osdk-helm-tutorial.html#osdk-helm-tutorial)
 * [Operador SDK](https://docs.openshift.com/container-platform/4.3/operators/operator_sdk/osdk-getting-started.html)

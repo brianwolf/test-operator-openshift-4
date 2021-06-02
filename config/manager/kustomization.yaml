@@ -5,4 +5,4 @@ kind: Kustomization
 images:
 - name: controller
   newName: brianlobonalabs/operator-example-nalabs
-  newTag: latest
+  newTag: 0.0.3

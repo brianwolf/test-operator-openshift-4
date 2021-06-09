@@ -1,7 +1,7 @@
 # Current Operator version
 VERSION ?= 0.0.3
 # Default bundle image tag
-BUNDLE_IMG ?= brianlobonalabs/bundle-example-nalabs:$(VERSION)
+BUNDLE_IMG ?= brianlobonalabs/bundle-dataflow-nalabs:$(VERSION)
 # Options for 'bundle-build'
 ifneq ($(origin CHANNELS), undefined)
 BUNDLE_CHANNELS := --channels=$(CHANNELS)
@@ -12,7 +12,7 @@ endif
 BUNDLE_METADATA_OPTS ?= $(BUNDLE_CHANNELS) $(BUNDLE_DEFAULT_CHANNEL)
 
 # Image URL to use all building/pushing image targets
-IMG ?= brianlobonalabs/operator-example-nalabs:$(VERSION)
+IMG ?= brianlobonalabs/operator-dataflow-nalabs:$(VERSION)
 
 all: docker-build
 
@@ -102,21 +102,21 @@ bundle-push:
 # PROPIOS
 # =============================================
 
-PROJECT_NAME=nalabs-operator-system
+PROJECT_NAME=operator-spring-dataflow
 
-# desplega el bundle, se debe tener creado el namespace "nalabs-operator-system"
+# desplega el bundle, se debe tener creado el namespace "dataflow-tools-nalabs"
 .SILENT:
 bundle-deploy-on-cluster: project-create
 	oc project $(PROJECT_NAME)
 	operator-sdk run bundle \
-		-n nalabs-operator-system \
+		-n dataflow-tools-nalabs \
 		docker.io/$(BUNDLE_IMG)
 
 
 # permite probar el despliegue de los objetos dentro del bundle
 .SILENT:
 bundle-test:
-	oc apply -f config/samples/demo_v1_example.yaml
+	oc apply -f config/samples/demo_v1_dataflow.yaml
 
 
 

@@ -1,0 +1,6 @@
+apiVersion: demo.dataflow/v1
+kind: dataflow
+metadata:
+  name: dataflow-sample
+spec:
+  replicaCount: 1

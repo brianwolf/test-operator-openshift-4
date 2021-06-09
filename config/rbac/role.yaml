@@ -29,14 +29,14 @@ rules:
   - create
 
 ##
-## Rules for demo.example/v1, Kind: Example
+## Rules for demo.dataflow/v1, Kind: dataflow
 ##
 - apiGroups:
-  - demo.example
+  - demo.dataflow
   resources:
-  - examples
-  - examples/status
-  - examples/finalizers
+  - dataflows
+  - dataflows/status
+  - dataflows/finalizers
   verbs:
   - create
   - delete

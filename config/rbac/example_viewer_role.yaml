@@ -1,20 +1,20 @@
-# permissions for end users to view examples.
+# permissions for end users to view dataflows.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: example-viewer-role
+  name: dataflow-viewer-role
 rules:
 - apiGroups:
-  - demo.example
+  - demo.dataflow
   resources:
-  - examples
+  - dataflows
   verbs:
   - get
   - list
   - watch
 - apiGroups:
-  - demo.example
+  - demo.dataflow
   resources:
-  - examples/status
+  - dataflows/status
   verbs:
   - get

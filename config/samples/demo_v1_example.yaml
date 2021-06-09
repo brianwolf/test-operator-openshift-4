@@ -1,6 +1,0 @@
-apiVersion: demo.example/v1
-kind: Example
-metadata:
-  name: example-sample
-spec:
-  replicaCount: 1

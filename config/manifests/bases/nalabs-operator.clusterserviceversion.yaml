@@ -2,9 +2,9 @@ apiVersion: operators.coreos.com/v1alpha1
 kind: ClusterServiceVersion
 metadata:
   annotations:
-    alm-examples: '[]'
+    alm-dataflows: '[]'
     capabilities: Basic Install
-  name: nalabs-operator.v0.0.0
+  name: dataflow-tools-nalabs.v0.0.0
   namespace: placeholder
 spec:
   apiservicedefinitions: {}
@@ -32,7 +32,7 @@ spec:
   - operator-test
   links:
   - name: Nalabs Operator
-    url: https://nalabs-operator.domain
+    url: https://dataflow-tools-nalabs.domain
   maintainers:
   - email: brian@nalabs.io
     name: brian-lobo

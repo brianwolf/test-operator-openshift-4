@@ -1,13 +1,13 @@
-# permissions for end users to edit examples.
+# permissions for end users to edit dataflows.
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: example-editor-role
+  name: dataflow-editor-role
 rules:
 - apiGroups:
-  - demo.example
+  - dataflow.tools.nalabs
   resources:
-  - examples
+  - dataflows
   verbs:
   - create
   - delete
@@ -17,8 +17,8 @@ rules:
   - update
   - watch
 - apiGroups:
-  - demo.example
+  - dataflow.tools.nalabs
   resources:
-  - examples/status
+  - dataflows/status
   verbs:
   - get

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example-controller-dep
+  labels:
+    app: example-controller
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: example-controller
+  template:
+    metadata:
+      name: example-controller-pod
+      labels:
+        app: example-controller
+    spec:
+      containers:
+        - name: example-controller-cont
+          image: "docker.io/brianlobonalabs/nginx-app1:latest"
+          ports:
+            - name: http
+              containerPort: 8081
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http

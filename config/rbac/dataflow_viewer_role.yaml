@@ -5,7 +5,7 @@ metadata:
   name: dataflow-viewer-role
 rules:
 - apiGroups:
-  - demo.dataflow
+  - tools.nalabs
   resources:
   - dataflows
   verbs:
@@ -13,7 +13,7 @@ rules:
   - list
   - watch
 - apiGroups:
-  - demo.dataflow
+  - tools.nalabs
   resources:
   - dataflows/status
   verbs:

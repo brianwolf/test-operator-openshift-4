@@ -29,10 +29,10 @@ rules:
   - create
 
 ##
-## Rules for demo.dataflow/v1, Kind: dataflow
+## Rules for tools.nalabs/v1, Kind: Dataflow
 ##
 - apiGroups:
-  - demo.dataflow
+  - tools.nalabs
   resources:
   - dataflows
   - dataflows/status
@@ -45,39 +45,18 @@ rules:
   - patch
   - update
   - watch
-- apiGroups:
+- verbs:
+  - "*"
+  apiGroups:
   - ""
   resources:
-  - pods
-  - services
-  - services/finalizers
-  - endpoints
-  - persistentvolumeclaims
-  - events
-  - configmaps
-  - secrets
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
-- apiGroups:
-  - apps
+  - "serviceaccounts"
+  - "services"
+- verbs:
+  - "*"
+  apiGroups:
+  - "apps"
   resources:
-  - deployments
-  - daemonsets
-  - replicasets
-  - statefulsets
-  verbs:
-  - create
-  - delete
-  - get
-  - list
-  - patch
-  - update
-  - watch
+  - "deployments"
 
 # +kubebuilder:scaffold:rules

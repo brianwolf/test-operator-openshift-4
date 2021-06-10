@@ -1,8 +1,8 @@
-domain: springDataFlow
+domain: tools.nalabs
 layout: helm.sdk.operatorframework.io/v1
-projectName: dataflow-tools-nalabs
+projectName: dataflow
 resources:
-- group: dataflow.tools.nalabs
-  kind: DataFlow
+- group: demo
+  kind: Dataflow
   version: v1
 version: 3-alpha

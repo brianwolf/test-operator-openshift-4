@@ -1,6 +1,8 @@
-apiVersion: demo.dataflow/v1
-kind: dataflow
+apiVersion: tools.nalabs/v1
+kind: Dataflow
 metadata:
   name: dataflow-sample
 spec:
-  replicaCount: 1
+  replicaCount: 2
+
+  

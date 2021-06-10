@@ -1,7 +1,7 @@
 # Current Operator version
 VERSION ?= 0.1.0
 # Default bundle image tag
-BUNDLE_IMG ?= brianlobonalabs/bundle-dataflow-nalabs:$(VERSION)
+BUNDLE_IMG ?= brianlobonalabs/bundle-dataflow-tools-nalabs:$(VERSION)
 # Options for 'bundle-build'
 ifneq ($(origin CHANNELS), undefined)
 BUNDLE_CHANNELS := --channels=$(CHANNELS)
@@ -12,7 +12,7 @@ endif
 BUNDLE_METADATA_OPTS ?= $(BUNDLE_CHANNELS) $(BUNDLE_DEFAULT_CHANNEL)
 
 # Image URL to use all building/pushing image targets
-IMG ?= brianlobonalabs/operator-dataflow-nalabs:$(VERSION)
+IMG ?= brianlobonalabs/operator-dataflow-tools-nalabs:$(VERSION)
 
 all: docker-build
 
@@ -39,7 +39,7 @@ undeploy: kustomize
 
 # Build the docker image
 docker-build:
-	docker build . -t ${IMG}
+	docker build . -t ${IMG} --no-cache
 
 # Push the docker image
 docker-push:
@@ -89,7 +89,7 @@ bundle: kustomize
 # Build the bundle image.
 .PHONY: bundle-build
 bundle-build:
-	docker build -f bundle.Dockerfile -t $(BUNDLE_IMG) .
+	docker build -f bundle.Dockerfile -t $(BUNDLE_IMG) . --no-cache
 
 # Push the bundle image.
 bundle-push:
@@ -102,7 +102,7 @@ bundle-push:
 # PROPIOS
 # =============================================
 
-PROJECT_NAME=dataflow-tools-nalabs
+PROJECT_NAME=dataflow-system
 
 # desplega el bundle, se debe tener creado el namespace "dataflow-tools-nalabs"
 .SILENT:

@@ -26,7 +26,7 @@ spec:
       - image: controller:latest
         args:
         - "--enable-leader-election"
-        - "--leader-election-id=dataflow-tools-nalabs"
+        - "--leader-election-id=dataflow"
         name: manager
         resources:
           limits:

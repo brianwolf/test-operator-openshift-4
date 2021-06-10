@@ -1,0 +1,41 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  annotations:
+    alm-examples: '[]'
+    capabilities: Basic Install
+  name: dataflow.v0.1.0
+  namespace: placeholder
+spec:
+  apiservicedefinitions: {}
+  customresourcedefinitions: {}
+  description: dataflow-tools-nalabs
+  displayName: dataflow-tools-nalabs
+  icon:
+  - base64data: ""
+    mediatype: ""
+  install:
+    spec:
+      deployments: null
+    strategy: ""
+  installModes:
+  - supported: false
+    type: OwnNamespace
+  - supported: true
+    type: SingleNamespace
+  - supported: true
+    type: MultiNamespace
+  - supported: false
+    type: AllNamespaces
+  keywords:
+  - dataflow
+  - nalabs
+  - operator
+  links:
+  - name: Dataflow
+    url: https://dataflow.domain
+  maturity: alpha
+  provider:
+    name: asd
+    url: asd
+  version: 0.1.0

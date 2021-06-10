@@ -106,10 +106,10 @@ PROJECT_NAME=dataflow-system
 
 # desplega el bundle, se debe tener creado el namespace "dataflow-tools-nalabs"
 .SILENT:
-bundle-deploy-on-cluster: project-create
+bundle-deploy-on-cluster:
 	oc project $(PROJECT_NAME)
 	operator-sdk run bundle \
-		-n dataflow-tools-nalabs \
+		-n $(PROJECT_NAME) \
 		docker.io/$(BUNDLE_IMG)
 
 
@@ -124,5 +124,18 @@ bundle-test:
 .SILENT:
 project-create:
 	oc new-project $(PROJECT_NAME)
+
+# crea el proyecto en el cluster
+.SILENT:
+project-delete:
+	oc delete project $(PROJECT_NAME) --force
+
+
+.SILENT:
+test:  project-create docker-build docker-push bundle bundle-build bundle-push bundle-deploy-on-cluster
+
+.SILENT:
+clean: undeploy uninstall project-delete
+
 
 

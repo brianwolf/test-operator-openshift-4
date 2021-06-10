@@ -136,6 +136,6 @@ test:  project-create docker-build docker-push bundle bundle-build bundle-push b
 
 .SILENT:
 clean: undeploy uninstall project-delete
-
+	rm -fr bundle
 
 

@@ -1,5 +1,5 @@
 # Current Operator version
-VERSION ?= 0.0.3
+VERSION ?= 0.1.0
 # Default bundle image tag
 BUNDLE_IMG ?= brianlobonalabs/bundle-dataflow-nalabs:$(VERSION)
 # Options for 'bundle-build'
@@ -102,7 +102,7 @@ bundle-push:
 # PROPIOS
 # =============================================
 
-PROJECT_NAME=operator-spring-dataflow
+PROJECT_NAME=dataflow-tools-nalabs
 
 # desplega el bundle, se debe tener creado el namespace "dataflow-tools-nalabs"
 .SILENT:

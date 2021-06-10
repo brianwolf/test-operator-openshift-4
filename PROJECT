@@ -3,6 +3,6 @@ layout: helm.sdk.operatorframework.io/v1
 projectName: dataflow-tools-nalabs
 resources:
 - group: dataflow.tools.nalabs
-  kind: OperatorDataFlow
+  kind: DataFlow
   version: v1
 version: 3-alpha

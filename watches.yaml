@@ -1,6 +1,6 @@
 # Use the 'create api' subcommand to add watches to this file.
 - group: dataflow.tools.nalabs
   version: v1
-  kind: OperatorDataFlow
+  kind: DataFlow
   chart: helm-charts/spring-cloud-dataflow
 # +kubebuilder:scaffold:watch

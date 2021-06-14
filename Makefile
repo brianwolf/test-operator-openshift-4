@@ -1,5 +1,5 @@
 # Current Operator version
-VERSION ?= 0.1.0
+VERSION ?= $(shell date +"%Y%m.%d%I%M.0")
 # Default bundle image tag
 BUNDLE_IMG ?= brianlobonalabs/bundle-dataflow-tools-nalabs:$(VERSION)
 # Options for 'bundle-build'
@@ -104,9 +104,22 @@ bundle-push:
 
 PROJECT_NAME=dataflow-system
 
-# desplega el bundle, se debe tener creado el namespace "dataflow-tools-nalabs"
+
+# crea el proyecto en el cluster
 .SILENT:
-bundle-deploy-on-cluster:
+project-create:
+	oc new-project $(PROJECT_NAME)
+
+
+# crea el proyecto en el cluster
+.SILENT:
+clean:
+	rm -fr bundle
+	oc delete project $(PROJECT_NAME) --force
+
+
+.SILENT:
+operator-deploy od: project-create docker-build docker-push bundle bundle-build bundle-push
 	oc project $(PROJECT_NAME)
 	operator-sdk run bundle \
 		-n $(PROJECT_NAME) \
@@ -115,27 +128,5 @@ bundle-deploy-on-cluster:
 
 # permite probar el despliegue de los objetos dentro del bundle
 .SILENT:
-bundle-test:
+operator-test ot:
 	oc apply -f config/samples/demo_v1_dataflow.yaml
-
-
-
-# crea el proyecto en el cluster
-.SILENT:
-project-create:
-	oc new-project $(PROJECT_NAME)
-
-# crea el proyecto en el cluster
-.SILENT:
-project-delete:
-	oc delete project $(PROJECT_NAME) --force
-
-
-.SILENT:
-test:  project-create docker-build docker-push bundle bundle-build bundle-push bundle-deploy-on-cluster
-
-.SILENT:
-clean: undeploy uninstall project-delete
-	rm -fr bundle
-
-

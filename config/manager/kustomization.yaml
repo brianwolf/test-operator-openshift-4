@@ -5,4 +5,4 @@ kind: Kustomization
 images:
 - name: controller
   newName: brianlobonalabs/operator-dataflow-tools-nalabs
-  newTag: 1623856330609138458.0.0
+  newTag: 1623877616458022826.0.0

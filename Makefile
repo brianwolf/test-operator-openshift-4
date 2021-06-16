@@ -102,7 +102,7 @@ bundle-push:
 # PROPIOS
 # =============================================
 
-PROJECT_NAME=dataflow-system
+PROJECT_NAME=dataflow-nalabstools
 VERSION := $(shell date +%s%N).0.0
 
 

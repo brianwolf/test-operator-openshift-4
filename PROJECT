@@ -2,7 +2,7 @@ domain: tools.nalabs
 layout: helm.sdk.operatorframework.io/v1
 projectName: dataflow
 resources:
-- group: demo
+- group: tools.nalabs
   kind: Dataflow
   version: v1
 version: 3-alpha

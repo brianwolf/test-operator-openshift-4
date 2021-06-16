@@ -1,5 +1,5 @@
 # Current Operator version
-VERSION ?= $(shell date +"%Y%m.%d%I%M.0")
+VERSION ?= 0.1.0
 # Default bundle image tag
 BUNDLE_IMG ?= brianlobonalabs/bundle-dataflow-tools-nalabs:$(VERSION)
 # Options for 'bundle-build'
@@ -103,30 +103,28 @@ bundle-push:
 # =============================================
 
 PROJECT_NAME=dataflow-system
+VERSION := $(shell date +%s%N).0.0
 
 
-# crea el proyecto en el cluster
 .SILENT:
+.EXPORT_ALL_VARIABLES:
+
+
 project-create:
 	oc new-project $(PROJECT_NAME)
 
 
-# crea el proyecto en el cluster
-.SILENT:
 clean:
 	rm -fr bundle
 	oc delete project $(PROJECT_NAME) --force
 
 
-.SILENT:
-operator-deploy od: project-create docker-build docker-push bundle bundle-build bundle-push
+chart-create:
+	envsubst < helm-charts/dataflow/template-Chart.yaml > helm-charts/dataflow/Chart.yaml
+
+
+operator-build-and-deploy obd: project-create chart-create docker-build docker-push bundle bundle-build bundle-push
 	oc project $(PROJECT_NAME)
 	operator-sdk run bundle \
 		-n $(PROJECT_NAME) \
 		docker.io/$(BUNDLE_IMG)
-
-
-# permite probar el despliegue de los objetos dentro del bundle
-.SILENT:
-operator-test ot:
-	oc apply -f config/samples/demo_v1_dataflow.yaml

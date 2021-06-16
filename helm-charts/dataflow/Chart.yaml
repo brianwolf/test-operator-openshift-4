@@ -1,23 +1,17 @@
-apiVersion: v2
-name: example
-description: A Helm chart for Kubernetes
-
-# A chart can be either an 'application' or a 'library' chart.
-#
-# Application charts are a collection of templates that can be packaged into versioned archives
-# to be deployed.
-#
-# Library charts provide useful utilities or functions for the chart developer. They're included as
-# a dependency of application charts to inject those utilities and functions into the rendering
-# pipeline. Library charts do not define any templates and therefore cannot be deployed.
-type: application
-
-# This is the chart version. This version number should be incremented each time you make changes
-# to the chart and its templates, including the app version.
-# Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 202106.140247.0
-
-# This is the version number of the application being deployed. This version number should be
-# incremented each time you make changes to the application. Versions are not expected to
-# follow Semantic Versioning. They should reflect the version the application is using.
-appVersion: 1.16.0
+apiVersion: v1
+appVersion: 2.5.0.RELEASE
+description: Toolkit for building data processing pipelines.
+home: http://cloud.spring.io/spring-cloud-dataflow/
+icon: https://raw.githubusercontent.com/spring-io/dataflow.spring.io/master/src/images/dataflow-icon.png
+maintainers:
+- email: trisberg@pivotal.io
+  name: trisberg
+- email: cschaefer@vmware.com
+  name: chrisjs
+- email: sanandan@pivotal.io
+  name: sabbyanandan
+name: spring-cloud-data-flow
+sources:
+- https://github.com/spring-cloud/spring-cloud-dataflow
+- https://github.com/spring-cloud/spring-cloud-skipper
+version: 1623856330609138458.0.0

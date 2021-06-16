@@ -806,7 +806,7 @@ rbac:
   ## binding Spring Cloud Dataflow ServiceAccount to a role
   ## that allows pods querying the K8s API
   ##
-  create: true
+  create: false
 
 ## Prometheus metrics
 ##
@@ -1049,7 +1049,7 @@ externalDatabase:
 ## https://github.com/bitnami/charts/blob/master/bitnami/kafka/values.yaml
 ##
 kafka:
-  enabled: false
+  enabled: true
   replicaCount: 1
   offsetsTopicReplicationFactor: 1
   ##

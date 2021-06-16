@@ -1,0 +1,25 @@
+dependencies:
+- name:  mysql
+  version: 1.6.2
+  repository: file://./local-repository/mysql 
+  condition: mysql.enabled
+- name:  rabbitmq
+  version: 6.16.6
+  repository: file://./local-repository/rabbitmq
+  condition: rabbitmq.enabled
+- name:  rabbitmq-ha
+  version: 1.38.2
+  repository: file://./local-repository/rabbitmq-ha
+  condition: rabbitmq-ha.enabled
+- name:  kafka
+  version: 0.20.8
+  repository: file://./local-repository/kafka
+  condition: kafka.enabled
+- name: prometheus
+  version: 10.4.0
+  repository: file://./local-repository/prometheus
+  condition: features.monitoring.enabled
+- name: grafana
+  version: 4.5.0
+  repository: file://./local-repository/grafana
+  condition: features.monitoring.enabled

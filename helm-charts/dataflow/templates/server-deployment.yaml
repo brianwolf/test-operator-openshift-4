@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: {{ template "scdf.fullname" . }}-server
-        image: {{ .Values.server.image }}:{{ .Values.server.version }}
+        image: {{ .Values.server.image }}
         imagePullPolicy: {{ .Values.server.imagePullPolicy }}
         volumeMounts:
           - name: database
@@ -34,7 +34,7 @@ spec:
         - containerPort: 8080
           name: http
         resources:
-{{ toYaml .Values.server.resources | indent 10 }}
+# {{ toYaml .Values.server.resources | indent 10 }}
         livenessProbe:
           httpGet:
             path: /management/health
@@ -80,10 +80,6 @@ spec:
           value: {{ .Values.features.batch.enabled | quote }}
         - name: SPRING_CLOUD_DATAFLOW_FEATURES_SCHEDULES_ENABLED
           value: {{ .Values.features.batch.enabled | quote }}
-        {{- range $key, $value := .Values.server.extraEnv }}
-        - name: {{ $key }}
-          value: "{{ $value }}"
-        {{- end }}
       volumes:
         - name: database
           secret:
@@ -94,7 +90,7 @@ spec:
             {{- end }}
       initContainers:
       - name: init-db-wait
-        image: {{ .Values.initContainers.dbWait.image }}:{{ .Values.initContainers.dbWait.tag }}
+        image: {{ .Values.initContainers.dbWait.image }}
         imagePullPolicy: {{ .Values.initContainers.dbWait.imagePullPolicy }}
         command: ['sh', '-c', 'until nc -w3 -z {{ template "scdf.database.host" . }} {{ template "scdf.database.port" . }}; do echo waiting for database; sleep 3; done;']
       serviceAccountName: {{ template "scdf.serviceAccountName" . }}

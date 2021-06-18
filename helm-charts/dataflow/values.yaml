@@ -27,14 +27,14 @@ server:
     labels: {}
     loadBalancerSourceRanges: []
   configMap:
-  resources: {}
+  # resources: {}
   #  limits:
   #    cpu: 1.0
   #    memory: 2048Mi
   #  requests:
   #    cpu: 0.5
   #    memory: 640Mi
-  extraEnv: {}
+  # extraEnv: {}
   containerConfiguration: {}
   #  container:
   #    registry-configurations:

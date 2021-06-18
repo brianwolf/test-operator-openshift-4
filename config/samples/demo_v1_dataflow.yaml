@@ -3,6 +3,6 @@ kind: Dataflow
 metadata:
   name: dataflow-sample
 spec:
-  replicaCount: 2
+  replicaCount: 1
 
   

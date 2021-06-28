@@ -102,7 +102,8 @@ bundle-push:
 # PROPIOS
 # =============================================
 
-PROJECT_NAME=dataflow-nalabstools
+# PROJECT_NAME=dataflow-nalabstools
+PROJECT_NAME=openshift-marketplace
 VERSION := $(shell date +%s%N).0.0
 
 
@@ -111,12 +112,13 @@ VERSION := $(shell date +%s%N).0.0
 
 
 project-create:
-	oc new-project $(PROJECT_NAME)
+	# oc new-project $(PROJECT_NAME)
 
 
 clean:
 	rm -fr bundle
-	oc delete project $(PROJECT_NAME) --force
+	oc delete CatalogSource dataflow-catalog
+	# oc delete project $(PROJECT_NAME) --force
 
 
 chart-create:

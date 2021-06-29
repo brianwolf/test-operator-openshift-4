@@ -103,7 +103,8 @@ bundle-push:
 # =============================================
 
 # PROJECT_NAME=dataflow-nalabstools
-PROJECT_NAME=openshift-marketplace
+PROJECT_INSTALLER=openshift-marketplace
+PROJECT_INSTANCE=dataflow-nalabs
 VERSION := $(shell date +%s%N).0.0
 
 
@@ -112,13 +113,13 @@ VERSION := $(shell date +%s%N).0.0
 
 
 project-create:
-	# oc new-project $(PROJECT_NAME)
+	# oc new-project $(PROJECT_INSTANCE)
 
 
 clean:
 	rm -fr bundle
 	oc delete CatalogSource dataflow-catalog
-	# oc delete project $(PROJECT_NAME) --force
+	# oc delete project $(PROJECT_INSTANCE) --force
 
 
 chart-create:
@@ -126,7 +127,8 @@ chart-create:
 
 
 operator-build-and-deploy obd: project-create chart-create docker-build docker-push bundle bundle-build bundle-push
-	oc project $(PROJECT_NAME)
 	operator-sdk run bundle \
-		-n $(PROJECT_NAME) \
+		-n $(PROJECT_INSTALLER) \
 		docker.io/$(BUNDLE_IMG)
+	
+	# oc project $(PROJECT_NAME)

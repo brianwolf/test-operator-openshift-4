@@ -82,11 +82,7 @@ Create the name of the service account to use
 {{- end -}}
 
 {{- define "scdf.database.password" -}}
-  {{- if .Values.mysql.enabled -}}
-    {{- printf "${mysql-root-password}" -}}
-  {{- else -}}
-    {{- printf "${database-password}" -}}
-  {{- end -}}
+    {{- printf "root" -}}
 {{- end -}}
 
 {{- define "scdf.database.dataflow" -}}

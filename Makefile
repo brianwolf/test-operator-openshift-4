@@ -103,7 +103,7 @@ bundle-push:
 # =============================================
 
 PROJECT_INSTALLER = openshift-marketplace
-VERSION = $(shell date +%s%N).0.0
+VERSION := $(shell date +%s%N).0.0
 
 HELM_CHARTS_DIRETORY = helm-charts/dataflow
 
@@ -125,7 +125,7 @@ chart-create:
 	envsubst < helm-charts/dataflow/template-Chart.yaml > helm-charts/dataflow/Chart.yaml
 
 
-operator-build-and-deploy obd: chart-create docker-build docker-push bundle bundle-build bundle-push
+operator-build-and-deploy obd: chart-create helm-package docker-build docker-push bundle bundle-build bundle-push
 	operator-sdk run bundle \
 		-n $(PROJECT_INSTALLER) \
 		docker.io/$(BUNDLE_IMG)

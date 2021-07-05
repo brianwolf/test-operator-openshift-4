@@ -94,22 +94,24 @@ spec:
         {{- if not (and .Values.allowEmptyRootPassword (not .Values.mysqlRootPassword)) }}
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
-            secretKeyRef:
-              name: {{ template "mysql.secretName" . }}
-              key: mysql-root-password
-              {{- if .Values.mysqlAllowEmptyPassword }}
-              optional: true
-              {{- end }}
+          value: "root"
+            # secretKeyRef:
+            #   name: {{ template "mysql.secretName" . }}
+            #   key: mysql-root-password
+            #   {{- if .Values.mysqlAllowEmptyPassword }}
+            #   optional: true
+            #   {{- end }}
         {{- end }}
         {{- if not (and .Values.allowEmptyRootPassword (not .Values.mysqPassword)) }}
         - name: MYSQL_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: {{ template "mysql.secretName" . }}
-              key: mysql-password
-              {{- if or .Values.mysqlAllowEmptyPassword (empty .Values.mysqlUser) }}
-              optional: true
-              {{- end }}
+          value: "root"
+          # valueFrom:
+            # secretKeyRef:
+            #   name: {{ template "mysql.secretName" . }}
+            #   key: mysql-password
+            #   {{- if or .Values.mysqlAllowEmptyPassword (empty .Values.mysqlUser) }}
+            #   optional: true
+            #   {{- end }}
         {{- end }}
         - name: MYSQL_USER
           value: {{ default "" .Values.mysqlUser | quote }}

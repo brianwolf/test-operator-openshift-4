@@ -102,8 +102,8 @@ database:
   scheme:
   host:
   port:
-  user: scdf
-  password:
+  user: 
+  password: 
   dataflow: dataflow
   skipper: skipper
 

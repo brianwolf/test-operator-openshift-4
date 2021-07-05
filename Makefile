@@ -102,33 +102,44 @@ bundle-push:
 # PROPIOS
 # =============================================
 
-# PROJECT_NAME=dataflow-nalabstools
-PROJECT_INSTALLER=openshift-marketplace
-PROJECT_INSTANCE=dataflow-nalabs
-VERSION := $(shell date +%s%N).0.0
+PROJECT_INSTALLER = openshift-marketplace
+VERSION = $(shell date +%s%N).0.0
+
+HELM_CHARTS_DIRETORY = helm-charts/dataflow
+
+REMOVE_IMG = brianlobonalabs/operator-dataflow-tools-nalabs
+REMOVE_BUNDLE = brianlobonalabs/bundle-dataflow-tools-nalabs
 
 
 .SILENT:
 .EXPORT_ALL_VARIABLES:
 
 
-project-create:
-	# oc new-project $(PROJECT_INSTANCE)
-
-
 clean:
 	rm -fr bundle
+	oc project $(PROJECT_INSTALLER)
 	oc delete CatalogSource dataflow-catalog
-	# oc delete project $(PROJECT_INSTANCE) --force
 
 
 chart-create:
 	envsubst < helm-charts/dataflow/template-Chart.yaml > helm-charts/dataflow/Chart.yaml
 
 
-operator-build-and-deploy obd: project-create chart-create docker-build docker-push bundle bundle-build bundle-push
+operator-build-and-deploy obd: chart-create docker-build docker-push bundle bundle-build bundle-push
 	operator-sdk run bundle \
 		-n $(PROJECT_INSTALLER) \
 		docker.io/$(BUNDLE_IMG)
 	
-	# oc project $(PROJECT_NAME)
+
+remove-old-images:
+	docker rmi $$(docker images ${REMOVE_IMG} -q | xargs)
+	docker rmi $$(docker images ${REMOVE_BUNDLE} -q | xargs)
+
+
+helm-test ht:
+	helm install --dry-run dataflow-sample ./helm-charts/dataflow > helm-test.yaml
+
+
+helm-package hp:
+	rm -rf $(HELM_CHARTS_DIRETORY)/charts/*
+	helm package ${HELM_CHARTS_DIRETORY}/local-repository/* -d ${HELM_CHARTS_DIRETORY}/charts

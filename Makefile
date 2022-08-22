@@ -1,7 +1,7 @@
 # Current Operator version
 VERSION ?= 0.0.3
 # Default bundle image tag
-BUNDLE_IMG ?= brianlobonalabs/bundle-example-nalabs:$(VERSION)
+BUNDLE_IMG ?= docker.io/brianwolf94/bundle-example-nalabs:$(VERSION)
 # Options for 'bundle-build'
 ifneq ($(origin CHANNELS), undefined)
 BUNDLE_CHANNELS := --channels=$(CHANNELS)
@@ -12,9 +12,9 @@ endif
 BUNDLE_METADATA_OPTS ?= $(BUNDLE_CHANNELS) $(BUNDLE_DEFAULT_CHANNEL)
 
 # Image URL to use all building/pushing image targets
-IMG ?= brianlobonalabs/operator-example-nalabs:$(VERSION)
+IMG ?= docker.io/brianwolf94/operator-example-nalabs:$(VERSION)
 
-all: docker-build
+all: podman-build
 
 # Run against the configured Kubernetes cluster in ~/.kube/config
 run: helm-operator
@@ -37,13 +37,13 @@ deploy: kustomize
 undeploy: kustomize
 	$(KUSTOMIZE) build config/default | kubectl delete -f -
 
-# Build the docker image
-docker-build:
-	docker build . -t ${IMG}
+# Build the podman image
+podman-build:
+	podman build . -t ${IMG}
 
-# Push the docker image
-docker-push:
-	docker push ${IMG}
+# Push the podman image
+podman-push:
+	podman push ${IMG}
 
 PATH  := $(PATH):$(PWD)/bin
 SHELL := env PATH=$(PATH) /bin/sh
@@ -89,11 +89,11 @@ bundle: kustomize
 # Build the bundle image.
 .PHONY: bundle-build
 bundle-build:
-	docker build -f bundle.Dockerfile -t $(BUNDLE_IMG) .
+	podman build -f bundle.Dockerfile -t $(BUNDLE_IMG) .
 
 # Push the bundle image.
 bundle-push:
-	docker push $(BUNDLE_IMG)
+	podman push $(BUNDLE_IMG)
 
 
 
@@ -106,11 +106,11 @@ PROJECT_NAME=nalabs-operator-system
 
 # desplega el bundle, se debe tener creado el namespace "nalabs-operator-system"
 .SILENT:
-bundle-deploy-on-cluster: project-create
+bundle-deploy-on-cluster:
 	oc project $(PROJECT_NAME)
 	operator-sdk run bundle \
 		-n nalabs-operator-system \
-		docker.io/$(BUNDLE_IMG)
+		$(BUNDLE_IMG)
 
 
 # permite probar el despliegue de los objetos dentro del bundle

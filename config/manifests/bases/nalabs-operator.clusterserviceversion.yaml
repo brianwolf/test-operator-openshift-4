@@ -11,9 +11,6 @@ spec:
   customresourcedefinitions: {}
   description: prueba de operator OLM
   displayName: nalabs-test-operator
-  icon:
-  - base64data: ""
-    mediatype: ""
   install:
     spec:
       deployments: null

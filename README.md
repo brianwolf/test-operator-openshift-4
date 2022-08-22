@@ -14,6 +14,25 @@ curl -LO https://github.com/operator-framework/operator-sdk/releases/download/v1
 mv helm-operator_linux_amd64 ./bin/helm-operator ;\
 ```
 
+## Despliegue
+
+### Requisitos
+
+* Estar conectado en un cluster de openshift o kubernetes
+* podman instalato en la pc
+
+### Comandos
+
+```bash
+make bundle
+make bundle-build
+make bundle-push
+make podman-build
+make podman-push
+make project-create
+make bundle-deploy-on-cluster
+```
+
 ## Documentacion
 
 * [Pasos a seguir por Redhat](https://docs.openshift.com/container-platform/4.7/operators/operator_sdk/helm/osdk-helm-tutorial.html#osdk-helm-tutorial)

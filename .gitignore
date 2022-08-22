@@ -1,6 +1,7 @@
 # app
-
+.vscode
 bundle
+cache
 
 # Binaries for programs and plugins
 *.exe

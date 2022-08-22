@@ -5,4 +5,4 @@ resources:
 - group: demo
   kind: Example
   version: v1
-version: 3-alpha
+version: "3"

@@ -1,6 +1,6 @@
 # Build the manager binary
-# FROM quay.io/operator-framework/helm-operator:v1.3.0
-FROM registry.redhat.io/openshift4/ose-helm-operator:v4.7
+FROM quay.io/operator-framework/helm-operator:v1.3.0
+# FROM registry.redhat.io/openshift4/ose-helm-operator:v4.7
 
 ENV HOME=/opt/helm
 COPY watches.yaml ${HOME}/watches.yaml
